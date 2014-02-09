@@ -18,7 +18,7 @@ sum_odd = (lst) ->
 
 console.log( sum_odd (generate_fibo([1,1], 4000000 ) ) )###
 
-# 4613732
+# response 4613732
 
 #better way to do this
 
