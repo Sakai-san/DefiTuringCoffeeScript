@@ -1,4 +1,4 @@
-Node  = require('./Node.js');
+Node  = require './Node.js'
 
 class LinkedList
   #TO DO enhance the reference to the tail
