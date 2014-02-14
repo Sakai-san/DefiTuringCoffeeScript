@@ -43,4 +43,17 @@ class Mathematics
       else
         return false
 
+  @factorial = (n) ->
+    if n <= 1
+      return 1
+    else
+      return n * @factorial(n - 1)
+
+  @sumDigit = (numberString) ->
+    if numberString.length == 0
+      return 0
+    else
+      return parseInt(numberString[0])+@sumDigit( numberString[1..numberString.length-1] )
+
+
 module.exports = Mathematics
