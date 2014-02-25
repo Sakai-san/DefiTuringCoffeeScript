@@ -53,6 +53,23 @@ object Mathematics {
     else n * factorial(n - 1)
   }
 
+  
+    /*
+    tailRecursiveFactorial gives the factorial number of an integer
+    arg			n integer
+    return		integer
+   */
+  def tailRecursiveFactorial( n: Int ) ={
+    
+    def fac(accumulator :Int , currentRank :Int ):Int = {
+      if( currentRank == n) accumulator
+      else
+        fac( accumulator *currentRank, currentRank + 1 )
+    }
+    fac( n, 1 )
+  }
+  
+  
   /*
     isPalidrome tells if a number-string is a palindrome
     arg			numberString string
@@ -70,8 +87,18 @@ object Mathematics {
 	arg			n integer
 	return		integer
    */
-  def sumToN(n: Int) = {
-    n * (n + 1) / 2
+  def sumToN(n: Int) = n * (n + 1) / 2
+  
+    /*
+	sumDigit gives the sum of digit an integer is composed of
+	arg			numberString string
+	return		integer
+   */
+  def sumDigit (numberString :String) :Int = {
+    if ( numberString.length == 0 ) 0
+    else
+      numberString.charAt(0).toString.toInt + sumDigit( numberString.substring(1, numberString.length ) )
   }
-
+  
+  
 }
