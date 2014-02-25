@@ -1,6 +1,7 @@
 package problems
 import lib.Mathematics._
 
+
 object problem1 extends App {
 
   // returns the some of 5 and 7 factors from the start to end range

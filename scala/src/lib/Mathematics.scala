@@ -1,15 +1,28 @@
 package lib
-
+import BigInt._
 object Mathematics {
+
+  def intSqrt(n: BigInt) = {
+    def trial(m: BigInt): BigInt = {
+      val q = n / m
+      if (q >= m)
+        m
+      else
+        trial((m + q) / 2)
+    }
+    trial(n / 2)
+  }
 
   /*
     getFactors gives all factors of an integer
     arg			n integer
     return		List of factors
    */
-  def getFactors(n: Int) = {
-    var rootN = Math.floor(Math.sqrt(n)).toInt
-    var factor = List[Int]()
+  def getFactors(n: BigInt) = {
+
+    //    var rootN = Math.floor( Math.sqrt(n) ).toInt
+    var rootN = intSqrt(n)
+    var factor = List[BigInt]()
 
     for (i <- rootN to 1 by -1) {
 
@@ -36,7 +49,7 @@ object Mathematics {
     arg n     integer
     return    boolean
   */
-  def isPrime(n: Int) = {
+  def isPrime(n: BigInt) = {
     var factors = getFactors(n)
     var noDividor = List(1, n)
     // if lists are same then n is a prime
@@ -48,28 +61,26 @@ object Mathematics {
     arg			n integer
     return		integer
    */
-  def factorial(n: Int): Int = {
+  def factorial(n: BigInt): BigInt = {
     if (n <= 1) 1
     else n * factorial(n - 1)
   }
 
-  
-    /*
+  /*
     tailRecursiveFactorial gives the factorial number of an integer
     arg			n integer
     return		integer
    */
-  def tailRecursiveFactorial( n: Int ) ={
-    
-    def fac(accumulator :Int , currentRank :Int ):Int = {
-      if( currentRank == n) accumulator
+  def tailRecursiveFactorial(n: Int) = {
+
+    def fac(accumulator: Int, currentRank: Int): Int = {
+      if (currentRank == n) accumulator
       else
-        fac( accumulator *currentRank, currentRank + 1 )
+        fac(accumulator * currentRank, currentRank + 1)
     }
-    fac( n, 1 )
+    fac(n, 1)
   }
-  
-  
+
   /*
     isPalidrome tells if a number-string is a palindrome
     arg			numberString string
@@ -88,17 +99,16 @@ object Mathematics {
 	return		integer
    */
   def sumToN(n: Int) = n * (n + 1) / 2
-  
-    /*
+
+  /*
 	sumDigit gives the sum of digit an integer is composed of
 	arg			numberString string
 	return		integer
    */
-  def sumDigit (numberString :String) :Int = {
-    if ( numberString.length == 0 ) 0
+  def sumDigit(numberString: String): Int = {
+    if (numberString.length == 0) 0
     else
-      numberString.charAt(0).toString.toInt + sumDigit( numberString.substring(1, numberString.length ) )
+      numberString.charAt(0).toString.toInt + sumDigit(numberString.substring(1, numberString.length))
   }
-  
-  
+
 }
