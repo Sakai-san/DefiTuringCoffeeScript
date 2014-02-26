@@ -7,10 +7,8 @@ object problem1 extends App {
   // returns the some of 5 and 7 factors from the start to end range
   def sum5And7(start: Int, end: Int): Int = {
     if (start > end) 0
-    else if (start % 5 == 0 || start % 7 == 0)
-      start + sum5And7(start + 1, end)
-    else
-      sum5And7(start + 1, end)
+    else if (start % 5 == 0 || start % 7 == 0) start + sum5And7(start + 1, end)
+    else sum5And7(start + 1, end)
   }
 
   println(sum5And7(0, 2013))

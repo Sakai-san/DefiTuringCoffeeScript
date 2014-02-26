@@ -88,7 +88,7 @@ object Mathematics {
   */
   def isPalindrome(numberString: String): Boolean = {
     if (numberString.length <= 1) true
-    else if (numberString.charAt(0).toString == numberString.charAt(numberString.length - 1).toString)
+    else if (numberString.substring(0,1) == numberString.takeRight(1)  )
       isPalindrome(numberString.substring(1, numberString.length - 1))
     else false
   }
@@ -108,7 +108,11 @@ object Mathematics {
   def sumDigit(numberString: String): Int = {
     if (numberString.length == 0) 0
     else
-      numberString.charAt(0).toString.toInt + sumDigit(numberString.substring(1, numberString.length))
+      numberString.substring(0,1).toInt + sumDigit(numberString.substring(1, numberString.length))
   }
 
+  
+  
+    def sumDigitConcise(numberString: String) = numberString.map(_.toString.toInt).sum
+  
 }

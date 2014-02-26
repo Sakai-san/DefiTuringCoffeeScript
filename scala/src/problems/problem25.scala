@@ -19,7 +19,7 @@ object problem25 extends App {
       if (current_term.toString.length >= size) {
         Outer.break;
       }
-      rank = rank + 1
+      rank += 1
     }
   }
 

@@ -12,15 +12,12 @@ object problem7 extends App {
   val Outer = new Breaks
   Outer.breakable {
     while (true) {
-
-      if (rank >= size) {
-        Outer.break;
-      }
+      if (rank >= size) Outer.break;
       if (isPrime(current_term)) {
         current_prime = current_term
-        rank = rank + 1
+        rank += 1
       }
-      current_term = current_term + 2
+      current_term += 2
     }
 
   }
