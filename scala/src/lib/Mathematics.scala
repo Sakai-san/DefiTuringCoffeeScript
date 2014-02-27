@@ -88,7 +88,7 @@ object Mathematics {
   */
   def isPalindrome(numberString: String): Boolean = {
     if (numberString.length <= 1) true
-    else if (numberString.substring(0,1) == numberString.takeRight(1)  )
+    else if (numberString.substring(0, 1) == numberString.takeRight(1))
       isPalindrome(numberString.substring(1, numberString.length - 1))
     else false
   }
@@ -108,11 +108,16 @@ object Mathematics {
   def sumDigit(numberString: String): Int = {
     if (numberString.length == 0) 0
     else
-      numberString.substring(0,1).toInt + sumDigit(numberString.substring(1, numberString.length))
+      numberString.substring(0, 1).toInt + sumDigit(numberString.substring(1, numberString.length))
   }
 
-  
-  
-    def sumDigitConcise(numberString: String) = numberString.map(_.toString.toInt).sum
-  
+  def sumDigitConcise(numberString: String) = numberString.map(_.toString.toInt).sum
+
+  /*
+	powerSumEqualToNumber tell if the sum of the digit to the power p, is equal to the number itself
+	arg			n BigInt, p Double
+	return		boolean
+   */
+  def powerSumEqualToNumber(n: BigInt, p: Double): Boolean = n.toString.map(i => Math.pow(i.toString.toDouble, p).toInt).sum == n
+
 }
