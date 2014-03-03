@@ -1,6 +1,7 @@
 package problems
-import lib.Mathematics._
+
 import scala.util.control.Breaks
+import lib.Mathematics
 
 object problem7 extends App {
 
@@ -13,7 +14,7 @@ object problem7 extends App {
   Outer.breakable {
     while (true) {
       if (rank >= size) Outer.break;
-      if (isPrime(current_term)) {
+      if (Mathematics.isPrime(current_term)) {
         current_prime = current_term
         rank += 1
       }

@@ -119,5 +119,7 @@ object Mathematics {
 	return		boolean
    */
   def powerSumEqualToNumber(n: BigInt, p: Double): Boolean = n.toString.map(i => Math.pow(i.toString.toDouble, p).toInt).sum == n
+  
+  
 
 }

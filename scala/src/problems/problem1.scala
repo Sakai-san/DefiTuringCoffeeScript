@@ -1,5 +1,5 @@
 package problems
-import lib.Mathematics._
+import lib.Mathematics
 
 
 object problem1 extends App {
@@ -16,7 +16,7 @@ object problem1 extends App {
   
   // better way (inclusion-exclusion principle)
   def sumMultiples(limit: Int, a: Int) = {
-    sumToN(  Math.floor( (limit - 1) / a ).toInt )  * a
+    Mathematics.sumToN(  Math.floor( (limit - 1) / a ).toInt )  * a
   }
 
   println(sumMultiples(2013, 5) + sumMultiples(2013, 7) - sumMultiples(2013, 35))
