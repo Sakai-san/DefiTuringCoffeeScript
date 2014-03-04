@@ -2,15 +2,24 @@ package lib
 import BigInt._
 object Mathematics {
 
-  def intSqrt(n: BigInt) = {
-    def trial(m: BigInt): BigInt = {
-      val q = n / m
-      if (q >= m)
-        m
-      else
-        trial((m + q) / 2)
+  def sqrt(number: BigInt) = {
+    def next(n: BigInt, i: BigInt): BigInt = (n + i / n) >> 1
+
+    val one = BigInt(1)
+
+    var n = one
+    var n1 = next(n, number)
+
+    while ((n1 - n).abs > one) {
+      n = n1
+      n1 = next(n, number)
     }
-    trial(n / 2)
+
+    while (n1 * n1 > number) {
+      n1 -= one
+    }
+
+    n1
   }
 
   /*
@@ -20,8 +29,9 @@ object Mathematics {
    */
   def getFactors(n: BigInt) = {
 
-    //    var rootN = Math.floor( Math.sqrt(n) ).toInt
-    var rootN = intSqrt(n)
+    // var rootN = Math.floor( Math.sqrt(n) ).toInt
+    var rootN = sqrt(n)
+
     var factor = List[BigInt]()
 
     for (i <- rootN to 1 by -1) {
@@ -119,7 +129,6 @@ object Mathematics {
 	return		boolean
    */
   def powerSumEqualToNumber(n: BigInt, p: Double): Boolean = n.toString.map(i => Math.pow(i.toString.toDouble, p).toInt).sum == n
-  
-  
 
+  def mirror(n: Int) = n.toString.reverse.toInt
 }

@@ -1,9 +1,5 @@
 package problems
 
-import lib.Mathematics._
-import scala.util.control.Breaks
-import scala.collection.mutable.ArrayBuffer
-
 object problem29 extends App {
 
   val aMin = 2
