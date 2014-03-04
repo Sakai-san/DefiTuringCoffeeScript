@@ -1,6 +1,5 @@
 package problems
 
-import scala.util.control.Breaks
 import lib.Mathematics
 
 object problem30 extends App {

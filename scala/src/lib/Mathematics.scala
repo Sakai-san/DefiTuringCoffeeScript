@@ -121,7 +121,7 @@ object Mathematics {
       numberString.substring(0, 1).toInt + sumDigit(numberString.substring(1, numberString.length))
   }
 
-  def sumDigitConcise(numberString: String) = numberString.map(_.toString.toInt).sum
+  def sumDigitConcise(numberString: String) = numberString.map( _.toString.toInt).sum
 
   /*
 	powerSumEqualToNumber tell if the sum of the digit to the power p, is equal to the number itself
