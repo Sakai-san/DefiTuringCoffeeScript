@@ -156,6 +156,18 @@ object Mathematics {
   def powerSumEqualToNumber(n: BigInt, p: Double): Boolean = n.toString.map(i => Math.pow(i.toString.toDouble, p).toInt).sum == n
 
   
+    /*
+	powerSum			Compute the SUM(x^x) from x=1 to n
+	arg					BigInt
+	return				BigInt
+   */
+  
+  def powerSum( n: BigInt): BigInt = {
+    if( n == 0 ) 0
+    else
+      n.pow(n.toInt) + powerSum( n-1 )
+  }
+  
   
   def mirror(n: Int) = n.toString.reverse.toInt
 
