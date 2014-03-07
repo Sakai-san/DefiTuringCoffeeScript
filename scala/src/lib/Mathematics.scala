@@ -138,7 +138,14 @@ object Mathematics {
   }
 
   def sumDigitConcise(numberString: String) = numberString.map(i => i.toString.toInt).sum
+  
+  
+  
+  def sumFactoDigitConcise(numberString: String):BigInt = numberString.map(i => factorial(BigInt( i.toString)) ).sum
 
+   
+  
+  def allDigitDifferent(numberString: String):Boolean = numberString.distinct.length == 9
   
   
   /*
