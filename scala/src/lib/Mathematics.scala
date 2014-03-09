@@ -155,17 +155,28 @@ object Mathematics {
    */
   def powerSumEqualToNumber(n: BigInt, p: Double): Boolean = n.toString.map(i => Math.pow(i.toString.toDouble, p).toInt).sum == n
 
+
   
     /*
-	powerSum			Compute the SUM(x^x) from x=1 to n
+	powerSum			Compute the SUM(x^n) from n=1 to n
 	arg					BigInt
 	return				BigInt
    */
   
-  def powerSum( n: BigInt): BigInt = {
+  def powerSum( x: BigInt, n: BigInt): BigInt = {
+	  (1 - x.pow((n+1).toInt ))/ (1-x) -1
+  }
+  
+    /*
+	powerSumAll			Compute the SUM(x^x) from x=1 to n
+	arg					BigInt
+	return				BigInt
+   */
+  
+  def powerSumAll( n: BigInt): BigInt = {
     if( n == 0 ) 0
     else
-      n.pow(n.toInt) + powerSum( n-1 )
+      n.pow(n.toInt) + powerSumAll( n-1 )
   }
   
   
@@ -183,4 +194,38 @@ object Mathematics {
     val realfactors = factors.reverse.tail
     realfactors.sum > n
   }
+  
+  
+    
+    /*
+	isPrimeTruncLeft		
+	arg						n BigInt
+	return					Boolean
+   */
+  def isPrimeTruncLeft(n: BigInt): Boolean = {
+    if ( n.toString.length ==1 )
+      isPrime( n )
+    else
+      isPrime( n ) && isPrimeTruncLeft( BigInt( n.toString.tail ) )
+  }
+  
+  
+    /*
+	isPrimeTruncRight		
+	arg						n BigInt
+	return					Boolean
+   */
+  def isPrimeTruncRight(n: BigInt): Boolean = {
+    if ( n.toString.length ==1 )
+      isPrime( n )
+    else
+      true && isPrimeTruncRight(  BigInt( n.toString.substring( 0, n.toString.length -1 ) ))
+  }
+  
+
+  def isPrimeTrunc(n: BigInt): Boolean = {
+      isPrimeTruncLeft(n) && isPrimeTruncRight(n)
+  }
+  
+  
 }

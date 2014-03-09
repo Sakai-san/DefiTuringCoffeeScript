@@ -32,5 +32,4 @@ object problem64 extends App {
  val puissLength = puiss.length
  println( s"cardinal de [ taille(n) = b^n ] = $puissLength" )
  // response = 49
- 
 }
