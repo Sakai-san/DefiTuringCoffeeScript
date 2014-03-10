@@ -1,7 +1,6 @@
 package problems
 import lib.Mathematics
 
-
 object problem1 extends App {
 
   // returns the some of 5 and 7 factors from the start to end range
@@ -13,10 +12,9 @@ object problem1 extends App {
 
   println(sum5And7(0, 2013))
 
-  
   // better way (inclusion-exclusion principle)
   def sumMultiples(limit: Int, a: Int) = {
-    Mathematics.sumToN(  Math.floor( (limit - 1) / a ).toInt )  * a
+    Mathematics.sumToN(Math.floor((limit - 1) / a).toInt) * a
   }
 
   println(sumMultiples(2013, 5) + sumMultiples(2013, 7) - sumMultiples(2013, 35))
