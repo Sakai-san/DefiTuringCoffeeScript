@@ -6,7 +6,7 @@ import lib.Mathematics
 
 object problem37 extends App {
 
-  def allTrucPrime(limit: Int) = {
+  def allTruncPrime(limit: Int) = {
     var counter = 0
     var current = BigInt(9)
     var truncPrime = List[BigInt]()
@@ -30,7 +30,7 @@ object problem37 extends App {
     truncPrime
   }
   
-  var allTruncPrimes = allTrucPrime(11)
+  var allTruncPrimes = allTruncPrime(11)
   println( "all trunc primes : " + allTruncPrimes )
   println( "sum of all trunc primes : " + allTruncPrimes.sum)
 
