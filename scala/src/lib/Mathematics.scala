@@ -206,8 +206,11 @@ object Mathematics {
     if ( n.toString.length ==1 )
       isPrime( n )
     else
-      isPrime( n ) && isPrimeTruncLeft( BigInt( n.toString.tail ) )
+      if(! isPrime( n ) ) false
+      else true && isPrimeTruncLeft( BigInt( n.toString.tail ) )
   }
+  
+  
   
   
     /*
@@ -219,7 +222,8 @@ object Mathematics {
     if ( n.toString.length ==1 )
       isPrime( n )
     else
-      true && isPrimeTruncRight(  BigInt( n.toString.substring( 0, n.toString.length -1 ) ))
+      if(! isPrime( n ) ) false
+      else true && isPrimeTruncRight(  BigInt( n.toString.substring( 0, n.toString.length -1 ) ))
   }
   
 
