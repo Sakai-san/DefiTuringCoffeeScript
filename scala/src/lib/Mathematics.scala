@@ -70,7 +70,7 @@ object Mathematics {
     arg			n BigInt
     return		Boolean
   */
-  def isPrime(n: BigInt) = {
+  def isPrime(n: BigInt):Boolean = {
     var factors = getFactors(n)
     var noDividor = List(1, n)
     // if lists are same then n is a prime
@@ -182,6 +182,25 @@ object Mathematics {
   
   def mirror(n: Int) = n.toString.reverse.toInt
 
+  
+   
+    /*
+	circlePermutations		gives all permutations of a number
+	arg						n BigInt
+	return					List[BigInt]
+   */
+  def circlePermutations(n: BigInt): List[BigInt] = {
+	val nbPerm = n.toString.length -1
+	def perm( lst :List[BigInt], nPerm :Int) :List[BigInt] ={
+	  if( nPerm == 0)
+	    lst
+	   else
+	     perm( List( BigInt((lst.head.toString.toList.tail :::  List(lst.head.toString.toList.head)).mkString("") ))  ::: lst, nPerm -1)
+	} 
+	perm( List(n), nbPerm)
+  }
+  
+  
   
   
     /*
