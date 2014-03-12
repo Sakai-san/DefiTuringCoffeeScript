@@ -214,6 +214,25 @@ object Mathematics {
     realfactors.sum > n
   }
   
+
+  
+    /*
+	isChunkDividable		test if all left substring of n are dividable according to its related size (eg. 321, 321 % 3 == 0 && 32 % 2 == 0 && 3 % 1 == 0 returns true)  
+	arg						n BigInt
+	return					Boolean
+   */
+  def isChunkDividable(n: BigInt): Boolean = {
+    
+    def recCheck( offset :Int ) :Boolean = {
+	    if ( offset == 1 ) true
+	    else{
+	      BigInt( n.toString.substring( 0,  offset) ) % offset == 0 && recCheck( offset -1 ) 
+	    }
+    }
+    
+     recCheck( n.toString.length )
+  }
+  
   
     
     /*
