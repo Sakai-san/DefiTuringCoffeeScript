@@ -58,16 +58,21 @@ object problem39 extends App {
 
   (3 to 10000).map(p => perimeterToSize.update(p, pytagoreanTriple(p).length))
   
+ 
+  
   // exchange key => value to value => key
   val revert = perimeterToSize map { _.swap }
 
-  // sort by key
+  // sort by key (key is now the size and the value is the perimeter
   val sizeToPerimeter = SortedMap(revert.toSeq: _*)
 
+  println(sizeToPerimeter)
+  
   // get the p whom there are the most triple
   println(sizeToPerimeter.toList.reverse.head._2)
   // response 9240
   
-  // 20 different triples p=9240. The more the triangle big is the more triple it could have
+  // 40/2 different triples p=9240. The more the triangle big is the more triple it could have
   println( sizeToPerimeter.toList.reverse.head._1 )
+
 }
