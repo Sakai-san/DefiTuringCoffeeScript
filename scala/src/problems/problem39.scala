@@ -40,7 +40,7 @@ object problem39 extends App {
       
       // only run the haf way, like Gauss did for the sum of n
       (low to Math.ceil(up/2.0).toInt).map( i => {
-        // the only dependent variable is b, since a is fixed in
+        // the only dependent variable is b, since a is fixed in (then only one loop is needed)
         // the following equation a + b + sqrt( a*a + b*b ) = p
         val j = (perimeter * perimeter -2*perimeter*i) / (2*perimeter - 2*i) 
         val cPow = Math.pow(i, 2) + Math.pow(j, 2)

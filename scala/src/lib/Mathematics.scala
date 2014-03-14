@@ -202,6 +202,23 @@ object Mathematics {
   
   
   
+      /*
+	syracuse		
+	arg				n BigInt
+	return			List[BigInt]
+   */
+  def syracuse(n: BigInt): List[BigInt] = {
+   
+    def auxSyrac( seq :List[BigInt] ) : List[BigInt]  ={
+      if( seq.head == 1 ) seq
+      else{
+        if(seq.head % 2 == 0) auxSyrac ( List( seq.head / 2) ::: seq )
+        else auxSyrac ( List( 3 * seq.head + 1) ::: seq )
+      }
+    }
+    auxSyrac( List(n) )
+  }
+  
   
     /*
 	isAbundant		tell if n is an abundant number, namely if the sum of its proper factors is bigger that n itself
