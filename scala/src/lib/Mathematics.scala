@@ -203,7 +203,7 @@ object Mathematics {
   
   
       /*
-	syracuse		
+	syracuse		gets the syracuse sequence of n
 	arg				n BigInt
 	return			List[BigInt]
    */
@@ -218,6 +218,13 @@ object Mathematics {
     }
     auxSyrac( List(n) )
   }
+  
+    /*
+	syracuseLength	gets the length of the syracuse sequence of n	
+	arg				n BigInt
+	return			Int
+   */
+  def syracuseLength(n :BigInt) :Int = syracuse(n).length
   
   
     /*
@@ -286,5 +293,10 @@ object Mathematics {
       isPrimeTruncLeft(n) && isPrimeTruncRight(n)
   }
   
+  
+  
+  
+  
+
   
 }
