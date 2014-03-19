@@ -1,11 +1,27 @@
 package problems
 
 import lib.Mathematics
+import scala.util.control.Breaks
 
 object problem41 extends App {
 
- 
-  println(  ( BigInt(999999999) to BigInt(111111111) by -2 ).filter( k=> !k.toString.contains("0") && k.toString.toList.distinct.length == 9 && Mathematics.isPrime(k)  ) )
+ val up = BigInt(999999999)
 
-  // response 
+  var counter = up
+
+    val Outer = new Breaks
+    Outer.breakable {
+      while (true) {
+        if (   Mathematics.isPandigital(counter) && Mathematics.isPrime(counter)  ) {
+          Outer.break;
+        }
+
+        // even number are not to be considerated
+        counter -= 2
+       
+      }
+    }
+
+println(counter)
+// response is 7652413
 }
