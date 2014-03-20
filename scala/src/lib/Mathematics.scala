@@ -1,5 +1,6 @@
 package lib
 import BigInt._
+import scala.collection.mutable.HashMap
 object Mathematics {
 
   /*
@@ -123,28 +124,32 @@ object Mathematics {
   
   
   /*
-    seqPalindrome	gets the palindrome seq but only seq whose size <= 51
-    arg				Int
-    return			List[Int]
+    seqPalindrome	gets the palindrome seq (assume lychrel number if |seq|>= 100 )
+    arg				List[BigInt]
+    return			List[BigInt]
   */
-  def seqPalindrome(n: BigInt, seq: List[BigInt]): List[BigInt] = {
+  def seqPalindrome(seq: List[BigInt]): List[BigInt] = {
 
-    if (isPalindrome(n.toString)) seq
-
-//    else if (seq.length >= 51)
-	else if (seq.length >= 14)
+    // process finish
+    if (seq.length >= 100 )
 		seq
-
-    else {
-      // process finish
-      if (isPalindrome(( BigInt(seq.head.toString.reverse) + seq.head).toString))
-        List( BigInt(seq.head.toString.reverse.toInt) ) ::: seq
-      // process not yet finish
+		
+	else if ( isPalindrome(( BigInt(seq.head.toString.reverse).+(seq.head)).toString) )
+			List( BigInt(seq.head.toString.reverse).+(seq.head) ) ::: seq
+		  
+	 // process not yet finish
       else
-        seqPalindrome(n, List( BigInt(seq.head.toString.reverse) + seq.head) ::: seq)
-    }
+        seqPalindrome(List( BigInt(seq.head.toString.reverse).+(seq.head)) ::: seq)
   }
 
+  def isLynchrel( n :BigInt ) :Boolean ={
+    if ( isPalindrome( n.toString ) ) false
+    else{
+      seqPalindrome( List(n) ).length >= 100 
+    }
+  }
+  
+  
   /*
 	sum gives the sum of integer from 0 to n
 	arg			n Int
@@ -296,4 +301,21 @@ object Mathematics {
     isPrimeTruncLeft(n) && isPrimeTruncRight(n)
   }
 
+  
+    /*
+	hashOfNumber			gives the hash of digits a number is composed of		
+	arg						n BigInt
+	return					Seq[(Int, Int)]
+   */
+   def hashOfNumber(n: BigInt): Seq[(Int,Int)] = {
+    val pattern = HashMap[Int, Int]()
+    for( i <-  n.toString.toList ){
+    	val currentInInt = i.toString.toInt
+    	if( pattern.contains( currentInInt) ) pattern.update( currentInInt, pattern(currentInInt) + 1 )    	
+    	else pattern.update( currentInInt, 1 )
+    }
+     pattern.toSeq.sortBy(_._1)
+  }
+  
+  
 }
