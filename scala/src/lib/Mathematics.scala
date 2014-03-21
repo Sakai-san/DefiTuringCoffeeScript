@@ -73,6 +73,18 @@ object Mathematics {
     factors == noDividor
   }
 
+  
+    /*
+    getPrimeFactor		tells if n is a prime number
+    arg					n BigInt
+    return				List[BigInt]
+  */
+  def getPrimeFactors(n: BigInt): List[BigInt] = {
+    getFactors(n).filter( f => isPrime(f) )  
+  }
+  
+  
+  
   /*
     factorial gives the factorial number of an integer
     arg			n Integer
@@ -124,7 +136,7 @@ object Mathematics {
   
   
   /*
-    seqPalindrome	gets the palindrome seq (assume lychrel number if |seq|>= 100 )
+    seqPalindrome	gets the palindrome seq ( |seq| <= 100 )
     arg				List[BigInt]
     return			List[BigInt]
   */
@@ -142,7 +154,16 @@ object Mathematics {
         seqPalindrome(List( BigInt(seq.head.toString.reverse).+(seq.head)) ::: seq)
   }
 
+  
+   /**
+   * This method checks if n is a Lynchrel number. Works only for n <= 10000.
+   *
+   * @param BigInt
+   * @return Boolean
+   * // @throws java.lang.Exception if n > 10000
+   */
   def isLynchrel( n :BigInt ) :Boolean ={
+   //  if( n>10000 )  throw new Exception( "n parameter should be <= 10000" )
     if ( isPalindrome( n.toString ) ) false
     else{
       seqPalindrome( List(n) ).length >= 100 
