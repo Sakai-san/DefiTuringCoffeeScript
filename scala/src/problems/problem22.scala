@@ -4,11 +4,12 @@ import lib.Mathematics
 
 object problem22 extends App {
 
-  
+ val min = BigInt(111111)  
+ val max = BigInt(125000-1 ) // since 8 * 125000 has 9 digits (10^6)
 
-(BigInt(111111) to BigInt(125000-1)).foreach(
+( min to max ).foreach(
 		  				i => {
-		  				  (BigInt(111111) to BigInt(125000-1)).foreach(
+		  				  (min to max).foreach(
 		  					j => {
 		  					 if(
 		  					i != j
@@ -20,5 +21,5 @@ object problem22 extends App {
 		  		} )
   
 // response both number = i = 113967,j = 116397, sum = 230364
-// can be optimized going out to the loop when found
+// can be optimized going out of the loop when found
 }

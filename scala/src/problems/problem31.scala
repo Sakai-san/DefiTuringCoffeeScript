@@ -2,7 +2,7 @@ package problems
 import scala.util.control._
 
 object problem31 extends App {
-
+/*
   val a1Min = 0
   val a1Max = 2
 
@@ -88,5 +88,13 @@ outer.breakable {
 	}
 
   println(s"total nb of combinations : $solutionsNb")
+  */
   // response wrong 92564
+  
+  
+  
+  
+//  (5x1 + 2x2 + x3 + 0.5x4 + 0.2x5 + 0.1x6 +0.05x7 = 10)
+  
+
 }

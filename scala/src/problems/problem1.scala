@@ -21,5 +21,4 @@ object problem1 extends App {
   println(sumMultiples(2013, 5) + sumMultiples(2013, 7) - sumMultiples(2013, 35))
 
   // response 636456
-  
 }
