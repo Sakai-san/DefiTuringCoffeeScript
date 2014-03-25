@@ -61,12 +61,16 @@ object Mathematics {
     factor
   }
 
-  /*
-    isPrime		tells if n is a prime number
-    arg			n BigInt
-    return		Boolean
-  */
+  
+   /**
+   * This method checks if n is a prime number.
+   *
+   * @param BigInt
+   * @return Boolean
+   * @throws java.lang.Exception if n < 0
+   */
   def isPrime(n: BigInt): Boolean = {
+	  if( n < 0 )  throw new Exception( "n parameter should be a natural number" )
     var factors = getFactors(n)
     var noDividor = List(1, n)
     // if lists are same then n is a prime
