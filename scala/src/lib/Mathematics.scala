@@ -86,6 +86,40 @@ object Mathematics {
   def getPrimeFactors(n: BigInt): List[BigInt] = {
     getFactors(n).filter( f => isPrime(f) )  
   }
+
+    /*
+    getCoupleFactors	gets the list of couple factors
+    arg					n BigInt
+    return				List[(BigInt, BigInt)]
+  */
+  def getCoupleFactors(n: BigInt): List[(BigInt, BigInt)] = {
+    
+    // getFactors function is slightly redesign for making a perfect root a double
+     def getFactorsWithPerfectRoot(n: BigInt) = {
+
+	    // var rootN = Math.floor( Math.sqrt(n) ).toInt
+	    var rootN = sqrt(n)
+	
+	    var factor = List[BigInt]()
+	    for (i <- rootN to 1 by -1) {
+	      if (n % i == 0) {
+	        var quotien = n / i
+	
+	          // push at the top
+	          factor = i :: factor
+	          // push at the end
+	          factor = factor ::: List(quotien)
+	      }
+	    }
+	    factor
+     }
+    
+    def buildCouple( couples :List[(BigInt, BigInt)], factors :List[BigInt] ) :List[(BigInt, BigInt)] ={
+    		if( factors.length == 2 ) couples :::  List( (factors.head, factors.last))
+    		else buildCouple(  couples :::  List( (factors.head, factors.last)) , factors.tail.reverse.tail.reverse)
+    }
+    buildCouple( List(), getFactorsWithPerfectRoot(n) )
+  }
   
   
   
