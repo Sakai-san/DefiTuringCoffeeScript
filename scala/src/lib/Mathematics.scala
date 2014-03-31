@@ -78,6 +78,26 @@ object Mathematics {
   }
 
   
+  
+   /**
+   * This method checks within a determined range if n is a prime number.
+   *
+   * @param BigInt
+   * @return Boolean
+   * @throws java.lang.Exception if n < 0
+   */
+  def isPrimeMemo(n: BigInt): Boolean = {
+	  
+    var factors = getFactors(n)
+    var noDividor = List(1, n)
+    // if lists are same then n is a prime
+    factors == noDividor
+    	    
+    
+    
+  }
+  
+  
     /*
     getPrimeFactor		tells if n is a prime number
     arg					n BigInt
@@ -375,6 +395,33 @@ object Mathematics {
     }
      pattern.toSeq.sortBy(_._1)
   }
-  
+
+   
+ // if preimage does exist the return it
+// else returns 0
+def triangularInverse( n: BigInt ) :Int = {
+  val rank = (Math.sqrt( (8*n + 1).toDouble) - 1 ) / 2 
+  if( rank.isValidInt ) rank.toInt
+  else 0
+}
+
+// if preimage does exist the return it
+// else returns 0
+def pantagonalInverse( n: BigInt ) :Int = {
+  val rank = (Math.sqrt( (24*n + 1).toDouble) + 1 ) / 6 
+  if( rank.isValidInt ) rank.toInt
+  else 0
+}
+
+// if preimage does exist the return it
+// else returns 0
+def hexagonalInverse( n: BigInt ) :Int = {
+  val rank = (Math.sqrt( (8*n + 1).toDouble) + 1 ) / 4 
+  if( rank.isValidInt ) rank.toInt
+  else 0
+}
+
+   
+   
   
 }
