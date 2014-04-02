@@ -212,6 +212,22 @@ object Mathematics {
         seqPalindrome(List( BigInt(seq.head.toString.reverse).+(seq.head)) ::: seq)
   }
 
+
+    /*
+    seqMultPersistence	gets the mutiplicative sequence persistence
+    arg					List[BigInt]
+    return				List[BigInt]
+  */
+  def seqMultPersistence(seq: List[BigInt]): List[BigInt] = {
+    if ( seq.head.toString.length == 1)
+		seq
+	else
+        seqMultPersistence( List( BigInt(multiplicDigitConcise(seq.head.toString)) ) ::: seq )
+  }
+  
+  
+  
+  
   
    /**
    * This method checks if n is a Lynchrel number. Works only for n <= 10000.
@@ -247,8 +263,22 @@ object Mathematics {
       numberString.substring(0, 1).toInt + sumDigit(numberString.substring(1, numberString.length))
   }
 
+  
+  
   def sumDigitConcise(numberString: String) = numberString.map(i => i.toString.toInt).sum
 
+  
+    /*
+	multiplicDigitConcise	gives the product of digit an integer is composed of
+	arg						numberString String
+	return					Int
+   */
+  def multiplicDigitConcise(numberString: String):Int ={
+    numberString.map(i => i.toString.toInt).toList.foldLeft(1){
+      ( acc, current) => { current * acc }
+  }}
+  
+  
   def sumFactoDigitConcise(numberString: String): BigInt = numberString.map(i => factorial(BigInt(i.toString))).sum
 
   def allDigitDifferent(numberString: String): Boolean = numberString.distinct.length == 9
@@ -324,6 +354,15 @@ object Mathematics {
    */
   def syracuseLength(n: BigInt): Int = syracuse(n).length
 
+    /*
+	persistenceLength	gets the length of the multiplicative persitence sequence of n	
+	arg					n BigInt
+	return				Int
+   */
+  def persistenceLength(n: BigInt): Int = seqMultPersistence(List(n)).length -1
+  
+  
+  
   /*
 	isAbundant		tell if n is an abundant number, namely if the sum of its proper factors is bigger that n itself
 	arg				n BigInt
