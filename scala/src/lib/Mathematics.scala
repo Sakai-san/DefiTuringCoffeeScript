@@ -98,6 +98,40 @@ object Mathematics {
   }
   
   
+   /**
+   * This method computes the greatest common divisor of two integers.
+   *
+   * @param BigInt, BigInt
+   * @return BigInt
+   */
+  def gcd(x :BigInt, y :BigInt) :BigInt ={
+	  if (y == 0) x
+	  else gcd(y, x % y)
+  }
+  
+   /**
+   * This method tells if two integers are coprimes.
+   *
+   * @param BigInt, BigInt
+   * @return Boolean
+   */
+   def areCoprimes( a: BigInt, b: BigInt ): Boolean = {
+	  gcd( a, b ) == 1
+  }
+  
+  
+   
+   /**
+   * This method is the Euler's totient function. Tells how many integer i < n are coprimes with n.
+   *
+   * @param BigInt
+   * @return Int
+   */
+    def phiEulerTotient( n: BigInt ): Int = {
+	  ( BigInt(1) to n.-(1) ).filter( i => areCoprimes(n, i) ).length
+   }
+   
+  
     /*
     getPrimeFactor		tells if n is a prime number
     arg					n BigInt
@@ -391,6 +425,27 @@ object Mathematics {
     recCheck(n.toString.length)
   }
 
+  
+    /*
+	isPrimeEeachOther		
+	arg						n BigInt
+	return					Boolean
+   */
+  def isPrimeEachOther(a: BigInt, b: BigInt): Boolean = {
+    getFactors(a).intersect( getFactors(b)) == List[BigInt](1)
+  }
+  
+  
+      /*
+	eulerFunction			gives how many number < n are prime number each other 		
+	arg						n BigInt
+	return					Int
+   */
+  def eulerFunction( n: BigInt ): Int = {
+    ( BigInt(1) to n.-(1) ).filter( i => isPrimeEachOther(i, n) ).length
+  }
+  
+  
   /*
 	isPrimeTruncLeft		
 	arg						n BigInt
