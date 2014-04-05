@@ -159,6 +159,27 @@ object Mathematics {
   
   
   
+   /**
+   * This method computes the n-th term of Stern sequence.
+   *
+   * @param BigInt
+   * @return BigInt
+   */
+    def sternSeq( n: BigInt ) :BigInt = {
+    
+    if ( n == 0) 0
+    else if ( n == 1 ) 1
+    else{
+      
+      if( n % 2 == 0 ){
+        sternSeq ( n/2 )
+      }
+      else{
+    	  sternSeq( (n -1)/2) + sternSeq( (n -1)/2 + 1)
+      }
+    }   
+  }
+  
   /*
     factorial gives the factorial number of an integer
     arg			n Integer
