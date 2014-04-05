@@ -180,6 +180,21 @@ object Mathematics {
     }   
   }
   
+    
+   /**
+   * This method tell if n is circular, e.g. 102 564 is circular since 410 256 / 4 = 102 564 .
+   *
+   * @param BigInt
+   * @return Boolean
+   */
+    def isCircular( n: BigInt ) :Boolean = {    
+	    val leftMostDigit = n.toString.toList.last.toString.toInt
+	    val newOne = BigInt(leftMostDigit + ""+  n.toString.reverse.tail.reverse )
+	    newOne % n == 0 && n != newOne 
+  }
+    
+    
+    
   /*
     factorial gives the factorial number of an integer
     arg			n Integer
