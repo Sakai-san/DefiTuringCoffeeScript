@@ -77,26 +77,7 @@ object Mathematics {
     factors == noDividor
   }
 
-  
-  
-   /**
-   * This method checks within a determined range if n is a prime number.
-   *
-   * @param BigInt
-   * @return Boolean
-   * @throws java.lang.Exception if n < 0
-   */
-  def isPrimeMemo(n: BigInt): Boolean = {
-	  
-    var factors = getFactors(n)
-    var noDividor = List(1, n)
-    // if lists are same then n is a prime
-    factors == noDividor
-    	    
     
-    
-  }
-  
   
    /**
    * This method computes the greatest common divisor of two integers.
@@ -108,6 +89,7 @@ object Mathematics {
 	  if (y == 0) x
 	  else gcd(y, x % y)
   }
+  
   
    /**
    * This method tells if two integers are coprimes.
@@ -259,6 +241,35 @@ object Mathematics {
         seqMultPersistence( List( BigInt(multiplicDigitConcise(seq.head.toString)) ) ::: seq )
   }
   
+  
+  
+   /**
+   * This method checks if n has an isolated digit.
+   *
+   * @param BigInt
+   * @return Boolean
+   */
+  def hasIsolatedDigit( n :BigInt ) :Boolean ={
+	  var nString = n.toString
+	  var hasIsolated = false
+	 
+	  if ( nString.length == 1 ) hasIsolated = false
+	  else if ( nString.length == 2){
+	    if ( nString.charAt(0).toString != nString.charAt(1).toString ) hasIsolated = true
+	    else hasIsolated = false
+	  }
+	  else{
+		  for ( i <- (1 to (nString.length-2) ) ){
+		    if( nString.charAt(i-1) !=  nString.charAt(i) && nString.charAt(i) !=  nString.charAt(i+1) ) hasIsolated = hasIsolated || true
+		  }
+		  // handles the first char (from left) of the string
+		  if( nString.charAt(0) !=  nString.charAt(1)  ) hasIsolated = hasIsolated || true
+		  
+		  // handles the last char (from right) of the string
+		  if( nString.charAt( nString.length -2) !=  nString.charAt( nString.length -1)  ) hasIsolated = hasIsolated || true
+	  }
+	  hasIsolated
+  }
   
   
   
@@ -425,25 +436,6 @@ object Mathematics {
     recCheck(n.toString.length)
   }
 
-  
-    /*
-	isPrimeEeachOther		
-	arg						n BigInt
-	return					Boolean
-   */
-  def isPrimeEachOther(a: BigInt, b: BigInt): Boolean = {
-    getFactors(a).intersect( getFactors(b)) == List[BigInt](1)
-  }
-  
-  
-      /*
-	eulerFunction			gives how many number < n are prime number each other 		
-	arg						n BigInt
-	return					Int
-   */
-  def eulerFunction( n: BigInt ): Int = {
-    ( BigInt(1) to n.-(1) ).filter( i => isPrimeEachOther(i, n) ).length
-  }
   
   
   /*
