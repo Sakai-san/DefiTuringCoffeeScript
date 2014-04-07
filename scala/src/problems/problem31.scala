@@ -2,99 +2,82 @@ package problems
 import scala.util.control._
 
 object problem31 extends App {
+  
+   def time[A](a: => A) = {
+    val miliseconds = System.nanoTime / (1000 * 1000 )
+    miliseconds
+  }
+
+  // do not forget to convert all values to ponds !!! 
+  // bad algorithm : brute force
 /*
-  val a1Min = 0
-  val a1Max = 2
-
-  val a2Min = 0
-  val a2Max = 5
-
-  val a3Min = 0
-  val a3Max = 10
-
-  val a4Min = 0
-  val a4Max = 20
-
-  val a5Min = 0
-  val a5Max = 50
-
-  val a6Min = 0
-  val a6Max = 100
-
-  val a7Min = 0
-  val a7Max = 200
-
-  val (coin1, coin2, coin3, coin4, coin5, coin6, coin7) = (5, 2, 1, 0.5, 0.2, 0.1, 0.05)
-
-  val total = 10
+  val start1 = time()
+  val total1 :Int = 10*100
+  var counter1 = 0
   
-   val outer = new Breaks;
-      val inner = new Breaks;
-
-  var solutionsNb = 0
-      
-  
-  
-outer.breakable {
-  for( d <- 0 to 10 ){
-    println( "d =" + d )
-            inner.breakable{for ( e <- 11 to 20 ){
-	            println( "e =" + e )
-		        if ( e > 14 ) inner.break
-		        
-		         inner.breakable{for ( f <- 21 to 30 ){
-	            	println( "f =" + f )
-	            }
-	      }
-        }
+  for( a <- (0 to 2 ) ){
+   for( b <- (0 to 5 )){
+	for( c <- (0 to 10 ) ){
+	  for( d <- (0 to 20) ){
+		for( e <- (0 to 50) ){
+		  for( f <- (0 to 100) ){
+		    for( g <- (0 to 200) ){
+			    if ( 500*a + 200*b + 100*c + 50*d + 20*e + 10*f + 5*g == total1 ){
+			    	counter1 += 1
+					}
+				}
+		    }
+		  }
+		}
+	  }
 	}
   }
-}
-    var ( i, j, k, l, m, n, o ) = ( a1Min, a2Min, a3Min, a4Min, a5Min, a6Min, a7Min )
-    while( i <= a1Max) {				        
-	      while ( j <= a2Max){
-	        if (i * coin1 + j * coin2  > total) j=a2Max+1
-	        
-	        while( k <= a3Max){
-	        	if (i * coin1 + j * coin2  + k * coin3  > total) k=a3Max+1
-	        	
-		        while (l <= a4Max){
-		          if (i * coin1 + j * coin2  + k * coin3 + l * coin4  > total) l=a4Max+1
-		       
-		          while ( m <= a5Max){
-		           if (i * coin1 + j * coin2  + k * coin3 + l * coin4 + m * coin5  > total) m=a5Max+1
-		           
-		           	while ( n <= a6Max){
-		           	if (i * coin1 + j * coin2  + k * coin3 + l * coin4 + m * coin5 + n * coin6  > total) n=a6Max+1
-		           	 
-		           	while  ( o <= a7Max){
-		           	  	 if (i * coin1 + j * coin2  + k * coin3 + l * coin4 + m * coin5 + n * coin6 + o * coin7 > total) o=a6Max+1
-		           	  	 
-		           	  	 else if (i * coin1 + j * coin2 + k * coin3 + l * coin4 + m * coin5 + n * coin6 + o * coin7 == total)
-		                    solutionsNb += 1
-		              o +=1
-		              }
-		           	 n +=1
-		             }
-		            m +=1
-		        	}
-		           l +=1
-		         }
-	        	 k +=1
-		        }
-	         j +=1
-	      }
-	    i +=1
+  println( counter1 )
+  val end1 = time()
+  println("Duration of the script 2 (milliseconds) : " + (end1 - start1) )
+*/
+  
+ 
+  
+  // do not forget to convert all to ponds !!! slightly optimized algorithm ~100 x faster
+/*
+    500a + 200b + 100c + 50d + 20e + 10f + 5g = 1000
+  	
+  	0 <= a <= 2
+  		200b <= total - 500a
+  		  100c <= total - 500a -200b
+  		     50d <= total - 500a -200b -100c
+  	  		     20e <= total - 500a -200b -100c -50d
+  	  		       10f <= total -500a -200b -100c - 50d -20e
+					  5g <= total - 500a -200b -100c - 50d - 20e - 10f
+*/
+
+  val start2 = time()
+  val total2 :Int = 1000
+  var counter2 :Int  =  0
+  
+  for( a <- (0 to 2 ) ){
+   for( b <- (0 to ( (total2 - 500*a )/200.0).floor.toInt  ) ){
+	for( c <- (0 to ( (total2 - 500*a -200*b )/100.00 ).floor.toInt ) ){
+	  for( d <- (0 to ((total2 - 500*a -200*b -100*c )/50.0).floor.toInt ) ){
+		for( e <- (0 to ((total2 - 500*a -200*b -100*c -50*d )/20.0).floor.toInt ) ){
+		  for( f <- (0 to ((total2 - 500*a -200*b -100*c -50*d -20*e )/10.0).floor.toInt ) ){
+		    for( g <- (0 to ((total2 - 500*a -200*b -100*c -50*d -20*e -10*f )/5.0).floor.toInt ) ){
+
+			    if (  500*a + 200*b + 100*c +50*d + 20*e + 10*f + 5*g == total2 ){
+			    	counter2 +=1
+					}
+				}
+		    }
+		  }
+		}
+	  }
 	}
-
-  println(s"total nb of combinations : $solutionsNb")
-  */
-  // response wrong 92564
+  }
+  println( counter2  )
+  val end2 = time()
+  println("Duration of the script 2 (milliseconds) : " + (end2 - start2) )
+ 
+ // reponse 104560
   
-  
-  
-  
-//  (5x1 + 2x2 + x3 + 0.5x4 + 0.2x5 + 0.1x6 +0.05x7 = 10)
-  
-
 }

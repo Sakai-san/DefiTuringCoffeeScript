@@ -111,7 +111,7 @@ object Mathematics {
    */
     def phiEulerTotient( n: BigInt ): Int = {
 	  ( BigInt(1) to n.-(1) ).filter( i => areCoprimes(n, i) ).length
-   }
+    }
    
   
     /*
