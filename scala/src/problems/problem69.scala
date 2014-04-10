@@ -19,15 +19,16 @@ object problem69 extends App {
    * then we have to minimize the denominator, which means the number with at most prime factors
    */
   
-	val all_primes = List(2 ) ::: ( 3 to 5000 by 2 ).filter( i => Mathematics.isPrime( i ) ).toList
+	var all_primes = List(2 ) ::: ( 3 to 5000 by 2 ).filter( i => Mathematics.isPrime( i ) ).toList
     var primeMultiple = 1
 	var i = 0
 	val limit = 1000000
-	 
-	while( primeMultiple* all_primes(i) < limit){
-	    primeMultiple *= all_primes(i)
-	    i=i+1
+
+	while( primeMultiple* all_primes.head < limit){
+	    primeMultiple *= all_primes.head
+	    all_primes = all_primes.tail
 	}
+
   println( primeMultiple )
   
   // response 510510
