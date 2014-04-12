@@ -1,6 +1,8 @@
 package lib
 import BigInt._
 import scala.collection.mutable.HashMap
+import scala.util.control.Breaks
+import scala.util.Random
 object Mathematics {
 
   /*
@@ -123,6 +125,186 @@ object Mathematics {
     getFactors(n).filter( f => isPrime(f) )  
   }
 
+  
+  
+   /**
+   * This method gets the list of couple whose sum equals to n.
+   *
+   * @param Int
+   * @return List[(Int,Int)]
+   */
+  def getCoupleSum(n: Int): List[(Int, Int)] = {
+       // only run the haf way, like Gauss did for the sum of n
+    val up = if (n % 2 == 0) (n/2)-1 else Math.floor(n/2.0).toInt
+    (1 to up).map( i => {
+    							(i, n-i)
+     											}).toList
+  
+  }
+  
+  
+  
+   /**
+   * This method gets the list of all combination of a given string. Then length of list is n!.
+   *
+   * @param String
+   * @return List[String]
+   * 
+   * Very short plot describing how the algo works : the generated tree look like this
+   * stringPerm( "tom" )
+   *
+   * 					   p( "", tom)                        
+   *          /           	   |               \
+   *     p(t,om)      		p(o,tm)          p(m,to)
+   *      /    \        	/      \         /      \
+   *   p(to,m) p(tm,o) 	p(ot,m) p(om,t)  p(mt,o) p(mo,t)
+   *                   
+   */
+  	def stringPerm( s :String ) :List[String] ={
+  	  	var combinations = List[String]()
+  		def p( soFar :String, rest : String ){
+  		  if( rest == "" ) combinations = combinations ::: List(soFar)
+  		  else{
+  		    for( i <- (0 to rest.length() -1 ) ){
+  		    	val next = soFar + rest(i)
+  		    	val remaining = rest.substring(0,i) + rest.substring(i+1, rest.length())
+  		    	p( next, remaining )
+  		    }
+  		  }
+  		}
+  		p( "", s )
+  		combinations
+  	}
+  	
+  	
+  /**
+   * Same method than above, only data structure change.
+   *
+   * @param Array[Int]
+   * @return List[Array[Int]]
+   */
+  	 def arrayElementPerm( l :Array[Int] ) :List[Array[Int]] ={
+  	  	var combinations = List[Array[Int]]()
+  	  	
+  		def p( soFar :Array[Int], rest :Array[Int] ){
+  		  if( rest.isEmpty ) combinations = combinations ::: List(soFar)
+  		  else{
+  		    for( i <- (0 to rest.length -1 ) ){
+  		    	val next = soFar ++ Array[Int](rest(i))
+  		    	val remaining = rest.slice(0,i) ++ rest.slice(i+1, rest.length)
+  		    	p( next, remaining )
+  		    }
+  		  }
+  		}
+  		p( Array[Int](), l )
+  		combinations
+  	}
+  
+  	
+   /**
+   * This method gets the transposed matrix.
+   *
+   * @param Array[Array[Int]]
+   * @return Array[Array[Int]]
+   */
+  	def matrixTranspose( m :Array[Array[Int]] ) :Array[Array[Int]] ={
+	  val rowNb = m.length
+	  val colNb = m(0).length
+	  var transposed = Array.ofDim[Int](rowNb,colNb)
+	  /*
+	  for( i <- (0 to rowNb -1) ){
+		  for( j <- (0 to colNb -1) ){
+		    transposed(j)(i) = m(i)(j)
+		  }
+	  }*/
+	  
+	 m.foreach(r => {
+	   
+	 })
+	  
+  	  transposed
+  	}
+  
+
+  
+  	
+  	
+   /**
+   * This method gets the couples whose element's sum equals to s. Element must belong to IN.
+   * Algo does only work with natural numbers. Indeed, negative could compensate positive number.
+   * eg. sum=10, (-11,21), whereas 21 > sum
+   * Algo : 1. sort array
+   *		2. break as soon as possible (first level > sum or combination within the second level > sum)
+   *
+   * @param Array[Int], Int
+   * @return List[(Int,Int)]
+   * @throws java.lang.Exception if there exist an element e < 0 within the array
+   */
+  	def complementarySum2Natural( a :Array[Int], s :Int ) :List[(Int,Int)] = {
+	
+	val as = a.sorted.toList
+	if( as.exists(e =>{e<0}) ) throw new Exception( "All Array's elements should be a naturel number." )	
+	var couples = List[(Int,Int)]()
+    var firstLoop = as
+    var copy = as
+    
+	val Outer = new Breaks
+	
+		Outer.breakable {
+	      while (  true  ) {
+	        if(firstLoop.head > s || firstLoop.isEmpty ){Outer.break;}
+	        else{
+	    	  Outer.breakable {
+		    	  while( true ) {
+				      if ( copy.isEmpty || (firstLoop.head + copy.head > s) ) {
+				          Outer.break;
+		    		  }
+		    		  else if ( firstLoop.head + copy.head  == s){
+		    			  couples = couples ::: List( (firstLoop.head, copy.head  ) )
+		    		  }
+				      copy = copy.tail
+		    	 } // end of second while
+	    	  }
+	    	  firstLoop= firstLoop.tail
+			  copy = as
+	    	} // end of else
+	     }// end of first while
+		}
+		couples
+    }
+  	
+  	
+  	
+ 
+  /**
+   * Generalize the previous method but in a brute force way (O(n^2)).
+   */
+  	def complementarySumBrute( a :Array[Int], s :Int ) :List[(Int,Int)] = {
+  	  var couples = List[(Int,Int)]()
+  	  (0 to a.length-1).foreach( i =>{
+  			  				(0 to a.length-1).foreach( j=> {
+  			  						if( a(i) + a(j) == s ){ couples = couples ::: List( (a(i),a(j) ) )}
+  			  				})
+  			  			})
+  	  couples
+  	}
+  	
+  
+  	
+  /**
+   * This method gets a list of n random natural numbers.
+   * If limit argument is specified, then each element belongs to [0,limit[.
+   * Otherwise each element is an Int.
+   *
+   * @param Int, Int (limit is optional)
+   * @return List[Int]
+   */
+  	def generateRandomList( size :Int, limit :Int = 0 ) :List[Int] = {
+	  if(limit == 0) Seq.fill(size)( Random.nextInt ).toList
+	  else{Seq.fill(size)( Random.nextInt(limit) ).toList }
+  	}
+  	
+  	
     /*
     getCoupleFactors	gets the list of couple factors
     arg					n BigInt
